@@ -1,10 +1,20 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
+const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
+
+app.use(
+    cors({
+      origin: "http://localhost:5173", // Replace with your React app's URL
+      methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+      credentials: true, // Include credentials (optional, if needed)
+    })
+  );
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
